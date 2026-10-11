@@ -126,16 +126,17 @@ export default function AdminPage() {
     <div className="min-h-screen bg-[#FBFBFC]">
       {/* Admin Header */}
       <header className="sticky top-0 z-30 bg-white/90 backdrop-blur-md border-b border-neutral-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 flex items-center justify-between">
-          <div className="flex items-center gap-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-0 sm:h-18 flex items-center justify-between gap-3">
+          <div className="flex items-center gap-2.5 sm:gap-4 min-w-0">
             <Link
               href="/"
-              className="w-9 h-9 rounded-full bg-neutral-100 hover:bg-neutral-200 text-neutral-700 flex items-center justify-center transition-colors"
+              className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-neutral-100 hover:bg-neutral-200 text-neutral-700 flex items-center justify-center transition-colors shrink-0"
+              title="Kembali ke Launcher"
             >
               <ArrowLeft className="w-4 h-4" />
             </Link>
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full overflow-hidden bg-white border border-neutral-200 p-0.5 shadow-2xs flex items-center justify-center shrink-0">
+            <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full overflow-hidden bg-white border border-neutral-200 p-0.5 shadow-2xs flex items-center justify-center shrink-0">
                 <Image
                   src="/my-logo.png"
                   alt="Logo Mufti Restu"
@@ -144,44 +145,51 @@ export default function AdminPage() {
                   className="w-full h-full object-contain rounded-full"
                 />
               </div>
-              <div>
-                <div className="flex items-center gap-2">
-                  <h1 className="font-heading font-extrabold text-xl text-neutral-950">
+              <div className="min-w-0">
+                <div className="flex items-center gap-1.5 sm:gap-2">
+                  <h1 className="font-heading font-extrabold text-base sm:text-xl text-neutral-950 truncate">
                     App Management
                   </h1>
-                  <span className="text-[11px] font-bold text-amber-700 bg-amber-100/70 px-2 py-0.5 rounded-full flex items-center gap-1">
+                  <span className="text-[10px] sm:text-[11px] font-bold text-amber-700 bg-amber-100/70 px-2 py-0.5 rounded-full flex items-center gap-1 shrink-0">
                     <ShieldCheck className="w-3 h-3 text-amber-600" />
                     Admin
                   </span>
                 </div>
-                <p className="text-xs text-neutral-500">
+                <p className="text-xs text-neutral-500 hidden sm:block">
                   Organize, edit, and reorder all portal cards.
                 </p>
               </div>
             </div>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 shrink-0">
             <button
               onClick={() => {
                 setEditingApp(null);
                 setModalOpen(true);
               }}
-              className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full text-xs font-bold bg-black text-white hover:bg-neutral-800 transition-all shadow-sm hover:scale-[1.02] cursor-pointer"
+              className="inline-flex items-center gap-1.5 px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs font-bold bg-black text-white hover:bg-neutral-800 transition-all shadow-sm active:scale-95 cursor-pointer"
             >
               <Plus className="w-4 h-4" />
-              Add Application
+              <span className="hidden sm:inline">Add Application</span>
+              <span className="sm:hidden">Add</span>
             </button>
           </div>
         </div>
       </header>
 
       {/* Main Content Area */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10">
         {/* Table Container */}
         <div className="bg-white rounded-3xl border border-neutral-200/90 shadow-[0_4px_24px_rgba(0,0,0,0.03)] overflow-hidden">
+          {apps.length > 0 && (
+            <div className="px-4 py-2 sm:hidden text-[11px] text-neutral-400 bg-neutral-50/70 border-b border-neutral-100 flex items-center justify-between">
+              <span>Geser tabel untuk detail lengkap</span>
+              <span>👉</span>
+            </div>
+          )}
           <div className="overflow-x-auto">
-            <table className="w-full text-left border-collapse">
+            <table className="w-full min-w-[620px] text-left border-collapse">
               <thead>
                 <tr className="border-b border-neutral-100 bg-neutral-50/70 text-[11px] font-bold uppercase tracking-wider text-neutral-400">
                   <th className="py-4 px-6 w-16">Sort</th>

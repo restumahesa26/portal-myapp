@@ -181,14 +181,14 @@ export function AppGrid({
           </div>
 
           {/* Category Filter Pills */}
-          <div className="flex flex-wrap items-center gap-2">
+          <div className="flex items-center gap-2 overflow-x-auto pb-2 -mx-4 px-4 sm:mx-0 sm:px-0 sm:flex-wrap sm:pb-0 no-scrollbar">
             {categories.map((cat) => {
               const active = selectedCategory === cat;
               return (
                 <button
                   key={cat}
                   onClick={() => setSelectedCategory(cat)}
-                  className={`px-4 py-2 rounded-full text-xs font-semibold transition-all cursor-pointer ${
+                  className={`shrink-0 px-4 py-2 rounded-full text-xs font-semibold transition-all cursor-pointer ${
                     active
                       ? 'bg-black text-white shadow-xs'
                       : 'bg-white text-neutral-600 hover:text-black hover:bg-neutral-100 border border-neutral-200/70'
@@ -202,15 +202,15 @@ export function AppGrid({
         </div>
 
         {/* Secondary Filters Bar: Status pills */}
-        <div className="flex flex-wrap items-center justify-between gap-4 py-3 px-4 bg-white rounded-2xl border border-neutral-200/80 mb-8 shadow-2xs">
-          <div className="flex items-center gap-2 text-xs font-semibold text-neutral-500">
-            <Filter className="w-3.5 h-3.5 text-neutral-400" />
-            <span>Status:</span>
+        <div className="flex flex-wrap items-center justify-between gap-3 py-3 px-4 bg-white rounded-2xl border border-neutral-200/80 mb-8 shadow-2xs">
+          <div className="flex items-center gap-2 text-xs font-semibold text-neutral-500 overflow-x-auto pb-1 sm:pb-0 no-scrollbar">
+            <Filter className="w-3.5 h-3.5 text-neutral-400 shrink-0" />
+            <span className="shrink-0">Status:</span>
             {['All', 'Production', 'Beta', 'WIP'].map((status) => (
               <button
                 key={status}
                 onClick={() => setSelectedStatus(status)}
-                className={`px-3 py-1 rounded-full text-xs transition-colors cursor-pointer ${
+                className={`shrink-0 px-3 py-1 rounded-full text-xs transition-colors cursor-pointer ${
                   selectedStatus === status
                     ? 'bg-neutral-900 text-white font-bold'
                     : 'text-neutral-600 hover:bg-neutral-100 font-medium'
@@ -224,7 +224,7 @@ export function AppGrid({
           {isAdmin && (
             <button
               onClick={onOpenAddModal}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold bg-neutral-100 hover:bg-black hover:text-white text-neutral-800 transition-all cursor-pointer"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold bg-neutral-100 hover:bg-black hover:text-white text-neutral-800 transition-all cursor-pointer shrink-0"
             >
               <Plus className="w-3.5 h-3.5" />
               Add New App

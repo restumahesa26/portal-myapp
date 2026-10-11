@@ -16,10 +16,10 @@ export function Navbar({ onOpenAddModal }: NavbarProps) {
 
   return (
     <header className="sticky top-0 z-40 w-full bg-white/90 backdrop-blur-md border-b border-neutral-100">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 sm:h-20 flex items-center justify-between">
         {/* Brand / Logo */}
-        <Link href="/" className="flex items-center gap-3 group">
-          <div className="w-10 h-10 rounded-full overflow-hidden bg-white border border-neutral-200/80 p-0.5 flex items-center justify-center shadow-xs group-hover:scale-105 group-hover:border-neutral-900 transition-all">
+        <Link href="/" className="flex items-center gap-2.5 sm:gap-3 group shrink-0">
+          <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full overflow-hidden bg-white border border-neutral-200/80 p-0.5 flex items-center justify-center shadow-xs group-hover:scale-105 group-hover:border-neutral-900 transition-all">
             <Image
               src="/my-logo.png"
               alt="Logo Mufti Restu"
@@ -30,16 +30,16 @@ export function Navbar({ onOpenAddModal }: NavbarProps) {
             />
           </div>
           <div className="flex flex-col">
-            <span className="font-heading font-extrabold text-xl tracking-tight text-neutral-900 group-hover:text-black">
+            <span className="font-heading font-extrabold text-lg sm:text-xl tracking-tight text-neutral-900 group-hover:text-black">
               Mufti<span className="text-amber-500">Hub</span>
             </span>
-            <span className="text-[10px] uppercase font-semibold tracking-widest text-neutral-400 -mt-1">
+            <span className="text-[9px] sm:text-[10px] uppercase font-semibold tracking-widest text-neutral-400 -mt-0.5 sm:-mt-1">
               Personal Portal
             </span>
           </div>
         </Link>
 
-        {/* Navigation links & status */}
+        {/* Navigation links & status (Desktop) */}
         <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-neutral-600">
           <Link
             href="/"
@@ -74,38 +74,51 @@ export function Navbar({ onOpenAddModal }: NavbarProps) {
         </nav>
 
         {/* Right side actions */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3">
+          {/* Mobile Admin Link */}
+          {isAdmin && (
+            <Link
+              href="/admin"
+              className="md:hidden p-2 rounded-full hover:bg-neutral-100 text-neutral-700 transition-colors"
+              title="Admin Panel"
+              aria-label="Admin Panel"
+            >
+              <LayoutDashboard className="w-4 h-4 text-amber-600" />
+            </Link>
+          )}
+
           {isAdmin && onOpenAddModal && (
             <button
               onClick={onOpenAddModal}
-              className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-semibold bg-amber-400 text-neutral-900 hover:bg-amber-300 shadow-sm transition-all hover:scale-[1.02] active:scale-[0.98]"
+              title="Add New App"
+              className="inline-flex items-center gap-1.5 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs font-semibold bg-amber-400 text-neutral-900 hover:bg-amber-300 shadow-xs transition-all hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
             >
               <Plus className="w-3.5 h-3.5" />
-              Add App
+              <span className="hidden sm:inline">Add App</span>
             </button>
           )}
 
           {user ? (
-            <div className="flex items-center gap-3 bg-neutral-50 border border-neutral-200/80 rounded-full pl-3 pr-1.5 py-1.5">
-              <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1.5 sm:gap-2.5 bg-neutral-50 border border-neutral-200/80 rounded-full pl-2 sm:pl-3 pr-1 py-1 sm:py-1.5">
+              <div className="flex items-center gap-1.5 sm:gap-2">
                 {isAdmin ? (
-                  <span className="flex items-center gap-1 text-[11px] font-bold text-emerald-700 bg-emerald-100/70 px-2 py-0.5 rounded-full">
+                  <span className="flex items-center gap-1 text-[10px] sm:text-[11px] font-bold text-emerald-700 bg-emerald-100/70 px-2 py-0.5 rounded-full">
                     <ShieldCheck className="w-3 h-3 text-emerald-600" />
-                    Owner
+                    <span>Owner</span>
                   </span>
                 ) : (
-                  <span className="text-[11px] font-medium text-neutral-500">
+                  <span className="text-[10px] sm:text-[11px] font-medium text-neutral-500 px-1">
                     Visitor
                   </span>
                 )}
-                <span className="text-xs font-medium text-neutral-700 max-w-[120px] truncate hidden sm:inline">
+                <span className="text-xs font-medium text-neutral-700 max-w-[100px] sm:max-w-[130px] truncate hidden md:inline">
                   {user.displayName || user.email}
                 </span>
               </div>
               <button
                 onClick={() => signOut()}
                 title="Sign Out"
-                className="w-8 h-8 rounded-full bg-white hover:bg-red-50 text-neutral-600 hover:text-red-600 border border-neutral-200/60 flex items-center justify-center transition-colors shadow-2xs"
+                className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white hover:bg-red-50 text-neutral-600 hover:text-red-600 border border-neutral-200/60 flex items-center justify-center transition-colors shadow-2xs cursor-pointer"
               >
                 <LogOut className="w-3.5 h-3.5" />
               </button>
@@ -113,7 +126,7 @@ export function Navbar({ onOpenAddModal }: NavbarProps) {
           ) : (
             <Link
               href="/login"
-              className="inline-flex items-center justify-center px-6 py-2.5 rounded-full text-sm font-semibold bg-black text-white hover:bg-neutral-800 transition-all shadow-sm hover:scale-[1.02] active:scale-[0.98]"
+              className="inline-flex items-center justify-center px-4 sm:px-6 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold bg-black text-white hover:bg-neutral-800 transition-all shadow-sm hover:scale-[1.02] active:scale-[0.98]"
             >
               Log In
             </Link>
