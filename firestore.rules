@@ -1,0 +1,14 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /apps/{appId} {
+      // Hanya akun yang di-whitelist dapat membaca dan menulis (bisa lebih dari 1 email)
+      // Tambahkan email yang diizinkan ke dalam list di bawah ini
+      allow read, write: if request.auth != null && 
+        request.auth.token.email in [
+          "mufti.restumahesa@gmail.com"
+          // "emailkedua@gmail.com"
+        ];
+    }
+  }
+}
